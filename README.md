@@ -1,70 +1,189 @@
-# Getting Started with Create React App
+# MovieGram
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+MovieGram is a social media / networking web application, in which the primary media form is movie reviews. Users, once registered, will
+have access to a feed comprised of movie reviews (poster, rating, review, comments section) from users they follow. Ultimately, the
+application will enable efficient sharing and recommendations for movies, so that users are able to make better movie-watching decisions.
 
-In the project directory, you can run:
+### Problem
 
-### `npm start`
+Given the vast array of available movies and numerous streaming options, I've found that choosing a movie to watch can be a difficult
+and time-consuming endevour. Moreover, while there are social media platforms that currently enable people to share movie recommendations
+and reviews (e.g., Instagram, TikTok, etc.), I've yet to find one that specializes in that functionality. My web application offers a
+solution to this problem through specialization: restricting media to only movie-related content.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### User Profile
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The user profile of this application is very broad: anyone who watches movies. The use case is to enable users to share their opinions
+about movies, interact with others' opinions, make recommendations, and find inspiration for new movies to watch.
 
-### `npm test`
+### Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- User login / authentification / account creation
+- Media feed comprised of movie reviews shared by other users they follow
+- Ability to comment on and like other users' posts
+- Post / Review creation and sharing
+- Profile customization (avatar, bio, username, favorite movies, etc.)
+- Access to movie details pages through search (with filtering options)
+- Access to other user profiles through search (with filtering options)
+- Ability to give a movie a rating without creating a post
+- Ability to recommend a movie to another user directly (messaging functionality) (nice to have)
 
-### `npm run build`
+## Implementation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React (axios, react-router-dom, jsx, sass)
+- Node (express, cors, dotenv, knex, mysql)
+- MySQL
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### APIs
 
-### `npm run eject`
+- The Movie Database API
+- YouTube API (nice to have)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Sitemap
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Login Page
+- Registration Page
+- User Profile Page
+- Movie Profile Page
+- Search Page
+- Media Feed Page
+- Contacts / Followers / Following Page
+- Post Creation Page
+- Explore / Recommendations Page (nice to have)
+- Chat / Messenger Page (nice to have)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Mockups
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Data
 
-## Learn More
+#### MySQL Database Tables:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### Users
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- id (PK) (increments, primary)
+- username / handle (string, not-nullable, unique?)
+- display_name (string, not-nullable)
+- email (string, not-nullable)
+- password (string, not-nullable, encrypted?)
+- profile_pic / avatar (string/url)
+- bio (string, character limit)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
 
-### Code Splitting
+##### Movies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- id (PK) (increments, primary)
+- movie_name (string, not-nullable)
+- tmdb_id (integer, unsigned, not-nullable)
+- rating (number)
+- trailer_url? (YouTube API?) (nice to have)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
 
-### Analyzing the Bundle Size
+##### Posts / Reviews
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- id (PK) (increments, primary)
+- user_id (FK) (integer, unsigned, not-nullable, references)
+- movie_id (FK) (integer, unsigned, not-nullable, references)
+- poster_url (string/url)
+- caption (string, character limit)
+- rating (enum, not-nullable)
+- where_to_stream (check API documentation?) (nice to have?)
+- is_post (enum, not-nullable)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
 
-### Making a Progressive Web App
+##### Comments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- id (PK) (increments, primary)
+- content (string, character limit)
+- post_id (FK) (integer, unsigned, not-nullable, references)
+- user_id (FK) (integer, unsigned, not-nullable, references)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
 
-### Advanced Configuration
+##### Likes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- id (PK) (increments, primary)
+- user_id (FK) (integer, unsigned, not-nullable, references)
+- post_id (FK) (integer, unsigned, not-nullable, references)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
 
-### Deployment
+##### Follows
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- id (PK) (increments, primary)
+- follower_id (FK) (integer, unsigned, not-nullable, references)
+- followee_id (FK) (integer, unsigned, not-nullable, references)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
 
-### `npm run build` fails to minify
+##### Conversations (nice to have)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- id (PK) (increments, primary)
+- name (string, character limit?)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
+
+##### Messages (nice to have)
+
+- id (PK) (increments, primary)
+- conversation_id (FK) (integer, unsigned, not-nullable, references)
+- sender_id (FK) (integer, unsigned, not-nullable, references)
+- text_content (string, character limit?)
+- movie_id (FK) (integer, unsigned, not-nullable, references)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
+
+##### Conversation_members (nice to have)
+
+- id (PK) (increments, primary)
+- conversation_id (FK) (integer, unsigned, not-nullable, references)
+- user_id (FK) (integer, unsigned, not-nullable, references)
+- created_at (timestamp, default)
+- updated_at (timestamp, default)
+
+### Endpoints
+
+- GET /api/users
+- POST /api/users
+- GET /api/users/:userId
+- DELETE /api/users/:userId
+- PATCH /api/users/:userId
+- GET /api/users/:userId/profile
+- GET /api/users/:userId/followers
+- GET /api/users/:userId/following
+- GET /api/users/:userId/posts
+- POST /api/users/:userId/posts
+- GET /api/users/:userId/feed
+- POST /api/users/:userId/follow
+- DELETE /api/users/:userId/follow
+- GET /api/movies
+- POST /api/movies
+- GET /api/movies/:movieId
+- PATCH /api/movies/:movieId
+- GET /api/movies/:movieId/profile
+- GET /api/movies/:movieId/reviews
+- GET /api/posts
+- GET /api/posts/:postId
+- PATCH /api/posts/:postId
+- PUT /api/posts/:postId/likes
+- POST /api/posts/:postId/comments
+
+### Auth
+
+The application will integrate login and user profile functionality, using authorization.
+
+## Roadmap
+
+1.
+
+## Nice-to-haves / Next Steps
+
+- Movie trailer playback (utilizing the YouTube API)
+- Direct messaging for chat and sharing functionality (potentially utilizing socket.io)
+- Explore / Recommedations Page (feed of algorithmically recommended movies, based on users past movie ratings / reviews)
