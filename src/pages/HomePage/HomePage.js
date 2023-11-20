@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const HomePage = () => {
-  const [feed, setFeed] = useState([]);
+  const [feed, setFeed] = useState();
 
   const navigate = useNavigate();
 
