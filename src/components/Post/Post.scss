@@ -1,0 +1,55 @@
+.post {
+  width: 30rem;
+  margin: 0 auto;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-container {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__poster {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 4px;
+  }
+  &__rating-section {
+    text-align: center;
+  }
+  &__cta-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__icon-container {
+    display: flex;
+  }
+  &__icon {
+    cursor: pointer;
+  }
+  &__review-section > * {
+    display: inline;
+  }
+}
+
+.comments {
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__input {
+    flex-grow: 1;
+  }
+
+  &__avatar {
+    width: 2rem;
+  }
+
+  &__view-toggle {
+    cursor: pointer;
+  }
+}

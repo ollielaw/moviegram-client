@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const ProfilePage = ({ profileData }) => {
+const ProfilePage = ({ profileData, userData }) => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("JWTtoken");

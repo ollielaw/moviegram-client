@@ -1,0 +1,14 @@
+.comment {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-container {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__avatar {
+    width: 2rem;
+  }
+}
