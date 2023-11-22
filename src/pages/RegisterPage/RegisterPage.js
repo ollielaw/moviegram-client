@@ -1,5 +1,5 @@
 import "./RegisterPage.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -13,6 +13,15 @@ const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const token = sessionStorage.getItem("JWTtoken");
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+      return;
+    }
+  }, []);
 
   const isEmailValid = () => {
     if (!email) return false;

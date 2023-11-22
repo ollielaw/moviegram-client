@@ -1,6 +1,6 @@
 import "./LoginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const LoginPage = () => {
@@ -9,6 +9,15 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
+  const token = sessionStorage.getItem("JWTtoken");
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+      return;
+    }
+  }, []);
 
   const isEmailValid = () => {
     if (!email) return false;

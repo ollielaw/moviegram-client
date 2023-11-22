@@ -73,7 +73,6 @@ const HomePage = () => {
 
   return (
     <main className="feed">
-      <h1>Welcome to Home Page</h1>
       {feed.map((post) => {
         return (
           <Post key={post.id} data={post} userData={userData} token={token} />

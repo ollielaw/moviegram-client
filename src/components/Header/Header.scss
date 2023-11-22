@@ -1,0 +1,14 @@
+.header {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+  }
+  .nav {
+    display: flex;
+    &__icon {
+      width: 2rem;
+    }
+  }
+}
