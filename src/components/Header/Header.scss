@@ -1,14 +1,29 @@
+@use "../../styles/partials/variables" as *;
+
 .header {
+  position: sticky;
+  top: 0;
+  background: $lightgrey;
   &__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem;
+    padding: 1rem;
+  }
+  &__logo {
+    margin-left: 1rem;
   }
   .nav {
     display: flex;
+    > a.active {
+      border-bottom: 4px solid $moviegram-blue;
+    }
+    > a:hover {
+      border-bottom: 4px solid $moviegram-darkblue;
+    }
     &__icon {
-      width: 2rem;
+      width: 2.25rem;
+      margin: 0 1rem;
     }
   }
 }

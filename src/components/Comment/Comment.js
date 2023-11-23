@@ -1,4 +1,5 @@
 import "./Comment.scss";
+import { timestampToDynamic } from "../../utils/formattingFunctions";
 
 const Comment = ({ data }) => {
   return (
@@ -12,7 +13,9 @@ const Comment = ({ data }) => {
           />
           <h4 className="comment__username">{data.username}</h4>
         </div>
-        <p className="comment__timestamp">{data.created_at}</p>
+        <h4 className="comment__timestamp">
+          {timestampToDynamic(Date.parse(data.created_at))}
+        </h4>
       </header>
       <div className="comment__content">
         <p>{data.content}</p>

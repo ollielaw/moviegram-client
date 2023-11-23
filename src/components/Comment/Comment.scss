@@ -1,14 +1,17 @@
 .comment {
+  margin: 1.5rem;
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
     &-container {
       display: flex;
       align-items: center;
     }
   }
   &__avatar {
-    width: 2rem;
+    width: 2.25rem;
+    margin-right: 0.5rem;
   }
 }

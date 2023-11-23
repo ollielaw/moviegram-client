@@ -42,7 +42,7 @@ const Header = () => {
     <header className="header">
       <div className="header__wrapper">
         <Link to="/" className="header__logo">
-          <h2>MovieGram</h2>
+          <h1>MovieGram</h1>
         </Link>
         <nav className="nav">
           <NavLink

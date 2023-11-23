@@ -1,15 +1,26 @@
+@use "../../styles/partials/variables" as *;
+
 .post {
   width: 30rem;
   margin: 0 auto;
+  padding: 2rem 0;
+  border-bottom: 1px solid $mercury;
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0.5rem;
     &-container {
       display: flex;
       align-items: center;
     }
   }
+
+  &__avatar {
+    width: 2.25rem;
+    margin-right: 0.5rem;
+  }
+
   &__poster {
     width: 100%;
     object-fit: cover;
@@ -18,19 +29,28 @@
   }
   &__rating-section {
     text-align: center;
+    margin: 0.5rem 0;
   }
   &__cta-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 0.5rem;
   }
   &__icon-container {
     display: flex;
   }
   &__icon {
     cursor: pointer;
+    margin: 0 0.5rem;
+    &--first {
+      margin-left: 0;
+    }
+    &--last {
+      margin-right: 0;
+    }
   }
-  &__review-section > * {
+  &__review-section * {
     display: inline;
   }
 }
@@ -40,16 +60,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0.5rem 0;
   }
   &__input {
     flex-grow: 1;
+    margin: 0 0.5rem;
   }
 
   &__avatar {
-    width: 2rem;
+    width: 2.25rem;
   }
 
   &__view-toggle {
     cursor: pointer;
+    display: inline;
   }
 }
