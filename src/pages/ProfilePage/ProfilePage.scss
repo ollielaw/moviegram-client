@@ -1,0 +1,28 @@
+@use "../../styles/partials/variables" as *;
+
+.profile {
+  padding: 0 3rem;
+  &__info {
+    display: flex;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    &-container {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    &-names {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  &__avatar {
+    margin-right: 2rem;
+  }
+  &__bio {
+    margin-bottom: 1.5rem;
+  }
+  &__bio > * {
+    display: inline;
+  }
+}

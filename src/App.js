@@ -1,4 +1,5 @@
 import "./App.scss";
+import { Fragment } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -9,23 +10,26 @@ import ContactsPage from "./pages/ContactsPage/ContactsPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import PostPage from "./pages/PostPage/PostPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Routes>
-          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/contacts" element={<ContactsPage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/search/users/:userId" element={<ProfilePage />} />
-          <Route path="/search/movies/:movieId" element={<MoviePage />} />
-          <Route path="/post" element={<SearchPage />} />
-          <Route path="/post/:movieId" element={<PostPage />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/contacts" element={<ContactsPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/search/users/:userId" element={<ProfilePage />} />
+            <Route path="/search/movies/:movieId" element={<MoviePage />} />
+            <Route path="/post" element={<SearchPage />} />
+            <Route path="/post/:movieId" element={<PostPage />} />
+          </Route>
         </Routes>
       </Router>
     </div>
