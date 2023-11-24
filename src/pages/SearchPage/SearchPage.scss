@@ -1,0 +1,46 @@
+@use "../../styles/partials/variables" as *;
+
+.search {
+  margin: 0 4rem;
+  &__form {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $mercury;
+  }
+  &__bar {
+    display: flex;
+    & > input {
+      flex-grow: 1;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      height: 3rem;
+    }
+    & > button.search__button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      display: flex;
+      align-items: center;
+      height: 3rem;
+    }
+  }
+  &__categories {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+  }
+  &__category {
+    height: 3rem;
+    width: 50%;
+    &--first {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &--last {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &--active {
+      background: $moviegram-darkblue;
+    }
+  }
+}

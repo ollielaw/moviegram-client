@@ -99,7 +99,8 @@ const ProfilePage = () => {
             )}
           </div>
           <h3 className="reviews">
-            {profilePosts ? profilePosts.length : "0"} reviews
+            {profile.num_posts ? profile.num_posts : "0"} review
+            {profile.num_posts === 1 ? "" : "s"}
           </h3>
         </div>
       </section>
