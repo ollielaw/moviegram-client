@@ -1,5 +1,6 @@
 import "./Post.scss";
 import Comment from "../Comment/Comment";
+import DeleteModal from "../DeleteModal/DeleteModal";
 import likeEmptyIcon from "../../assets/images/like_empty_icon.svg";
 import likeFullIcon from "../../assets/images/like_full_blue_icon.svg";
 import commentIcon from "../../assets/images/comment_icon.svg";
@@ -9,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { timestampToDynamic } from "../../utils/formattingFunctions";
 
-const Post = ({ data, userData, token }) => {
+const Post = ({ data, userData, token, handlePostDelete }) => {
   const navigate = useNavigate();
   const [comments, setComments] = useState(null);
   const [isCommentsExpanded, setIsCommentsExapnded] = useState(false);
@@ -76,6 +77,7 @@ const Post = ({ data, userData, token }) => {
       );
       setIsCommentsExapnded(true);
       setComments(response.data);
+      setComment("");
     } catch (error) {
       console.error(error);
     }
@@ -117,6 +119,27 @@ const Post = ({ data, userData, token }) => {
     }
   };
 
+  const handleCommentDelete = async (commentId) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/posts/${data.id}/comments/${commentId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (comments.length === 1) {
+        setIsCommentsExapnded(false);
+        setComments(null);
+        return;
+      }
+      setComments(comments.filter(({ id }) => id !== commentId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <article className="post">
       <header className="post__header">
@@ -140,9 +163,11 @@ const Post = ({ data, userData, token }) => {
               >
                 Edit
               </button>
-              <button type="button" className="post__delete">
-                Delete
-              </button>
+              <DeleteModal
+                isPost={true}
+                handleDelete={handlePostDelete}
+                data={data}
+              />
             </>
           )}
         </div>
@@ -215,9 +240,16 @@ const Post = ({ data, userData, token }) => {
         <button className="comments__button">Post</button>
       </form>
       <section className="comments">
-        {isCommentsExpanded ? (
+        {isCommentsExpanded && comments ? (
           comments.map((comm) => {
-            return <Comment key={comm.id} data={comm} />;
+            return (
+              <Comment
+                key={comm.id}
+                data={comm}
+                handleCommentDelete={handleCommentDelete}
+                currUser={userData.id}
+              />
+            );
           })
         ) : comments && comments.length ? (
           <h3 className="comments__view-toggle" onClick={showComments}>

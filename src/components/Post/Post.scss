@@ -23,10 +23,15 @@
   &__edit {
     margin-left: 1rem;
     border-radius: 1.25rem;
+    padding: 0;
+    width: 5rem;
+    height: 2rem;
   }
   &__delete {
     margin-left: 1rem;
     border-radius: 1.25rem;
+    padding: 0;
+    width: 5rem;
     background: $moviegram-red;
     &:hover {
       background-color: $moviegram-darkred;
@@ -90,7 +95,15 @@
   }
   &__input {
     flex-grow: 1;
-    margin: 0 0.5rem;
+    margin-left: 0.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &__button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid $mercury;
+    border-left: 0;
   }
 
   &__avatar {

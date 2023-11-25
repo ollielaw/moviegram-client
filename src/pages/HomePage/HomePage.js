@@ -13,6 +13,22 @@ const HomePage = () => {
 
   const token = sessionStorage.getItem("JWTtoken");
 
+  const fetchFeed = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/user/feed`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFeed(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -29,21 +45,6 @@ const HomePage = () => {
           }
         );
         setUserData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const fetchFeed = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/user/feed`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setFeed(data);
       } catch (error) {
         console.error(error);
       }
@@ -69,13 +70,36 @@ const HomePage = () => {
     }
   };
 
+  const handlePostDelete = async (postId) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/posts/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      await fetchFeed();
+      setPage(2);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (!(feed && userData)) return null;
 
   return (
     <main className="feed">
       {feed.map((post) => {
         return (
-          <Post key={post.id} data={post} userData={userData} token={token} />
+          <Post
+            key={post.id}
+            data={post}
+            userData={userData}
+            token={token}
+            handlePostDelete={handlePostDelete}
+          />
         );
       })}
       <button type="button" className="feed__button" onClick={handleLoad}>

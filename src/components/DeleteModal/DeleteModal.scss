@@ -1,0 +1,60 @@
+@use "../../styles/partials/variables" as *;
+
+.modal {
+  &__delete {
+    margin-left: 1rem;
+    border-radius: 1.25rem;
+    padding: 0;
+    height: 2rem;
+    width: 5rem;
+    background: $moviegram-red;
+    &:hover {
+      background-color: $moviegram-darkred;
+    }
+    &--comment {
+      height: 1.5rem;
+    }
+  }
+  &__title {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  &__description {
+    margin: 0 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__button {
+    width: 1rem;
+    flex-grow: 1;
+    &--cancel {
+      background: $lightgrey;
+      color: $moviegram-black;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border: 1px solid $mercury;
+      &:hover {
+        color: $white;
+      }
+    }
+    &--delete {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border: 1px solid $mercury;
+      border-left: 0;
+    }
+    &-container {
+      display: flex;
+      margin: 0 2rem;
+    }
+  }
+}

@@ -35,6 +35,13 @@
   &__avatar {
     margin-right: 2rem;
   }
+  &__signout-button {
+    border-radius: 1.25rem;
+    background: $moviegram-red;
+    &:hover {
+      background: $moviegram-darkred;
+    }
+  }
   &__bio {
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;

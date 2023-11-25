@@ -99,6 +99,23 @@ const MoviePage = () => {
     }
   };
 
+  const handlePostDelete = async (postId) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/posts/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setMoviePosts(moviePosts.filter(({ id }) => id !== postId));
+      setUserRating(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (!(movieData && moviePosts && userData)) return null;
 
   if (!movieData.avg_rating) return null;
@@ -303,7 +320,7 @@ const MoviePage = () => {
         {moviePosts && moviePosts.length ? (
           <section className="moviepage__reviews">
             <h2>
-              {movieData.num_posts} Review{movieData.num_posts === 1 ? "" : "s"}
+              {moviePosts.length} Review{moviePosts.length === 1 ? "" : "s"}
             </h2>
             <div className="moviepage__review-container">
               {moviePosts.map((post) => {
@@ -313,6 +330,7 @@ const MoviePage = () => {
                     data={post}
                     userData={userData}
                     token={token}
+                    handlePostDelete={handlePostDelete}
                   />
                 );
               })}

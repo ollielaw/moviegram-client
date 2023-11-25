@@ -79,6 +79,23 @@ const ProfilePage = () => {
     navigate("/login");
   };
 
+  const handlePostDelete = async (postId) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/posts/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setProfilePosts(profilePosts.filter(({ id }) => id !== postId));
+      setProfile({ ...profile, num_posts: profile.num_posts - 1 });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (!(profile && userData)) return null;
 
   return (
@@ -137,6 +154,7 @@ const ProfilePage = () => {
                     data={post}
                     userData={userData}
                     token={token}
+                    handlePostDelete={handlePostDelete}
                   />
                 );
               })}
