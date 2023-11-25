@@ -5,8 +5,7 @@ import axios from "axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [isLoginError, setIsLoginError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
@@ -19,21 +18,8 @@ const LoginPage = () => {
     }
   }, []);
 
-  const isEmailValid = () => {
-    if (!email) return false;
-    return true;
-  };
-
-  const isPasswordValid = () => {
-    if (!password) return false;
-    return true;
-  };
-
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!(isEmailValid() && isPasswordValid())) {
-      return;
-    }
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/login`,
@@ -49,20 +35,18 @@ const LoginPage = () => {
         },
       });
       sessionStorage.setItem("currUserId", res.data.id);
-      setIsLoginError(false);
-      setErrorMessage("");
       setEmail("");
       setPassword("");
       navigate("/");
     } catch (error) {
-      setErrorMessage(error.message);
-      setIsLoginError(true);
+      setError(error.response.data.message);
     }
   };
 
   return (
     <main className="login">
       <h1 className="login__header">MovieGram</h1>
+      {error && <div className="login__message">{error}</div>}
       <form className="login__form" onSubmit={handleLogin}>
         <input
           className="login__input"
@@ -83,7 +67,10 @@ const LoginPage = () => {
         <button className="login__button">Log In</button>
       </form>
       <p>
-        Don't have an account? <Link to="/register">Register Here.</Link>
+        Don't have an account?{" "}
+        <Link className="login__register" to="/register">
+          Register Here.
+        </Link>
       </p>
     </main>
   );
