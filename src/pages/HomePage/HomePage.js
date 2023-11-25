@@ -62,7 +62,7 @@ const HomePage = () => {
           },
         }
       );
-      setFeed([...feed, data]);
+      setFeed([...feed, ...data]);
       setPage(page + 1);
     } catch (error) {
       console.error(error);

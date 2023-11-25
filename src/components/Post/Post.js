@@ -192,7 +192,6 @@ const Post = ({ data, userData, token }) => {
         <input
           className="comments__input"
           type="text"
-          name="comment"
           placeholder="Add a new comment..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}

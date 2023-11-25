@@ -226,7 +226,11 @@ const MoviePage = () => {
             10
           </button>
         </div>
-        <button type="button" className="moviepage__post-button">
+        <button
+          type="button"
+          className="moviepage__post-button"
+          onClick={() => navigate(`/post/${movieData.id}`)}
+        >
           Add a review <img src={uploadIcon} alt="upload new review icon" />
         </button>
       </section>

@@ -1,10 +1,11 @@
 import "./SearchItem.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import uploadIcon from "../../assets/images/upload_icon.svg";
-import { Link } from "react-router-dom";
+import uploadIcon from "../../assets/images/upload-review__icon.svg";
+import { Link, useNavigate } from "react-router-dom";
 
 const SearchItem = ({ category, data, isPost, token }) => {
+  const navigate = useNavigate();
   const [userRating, setUserRating] = useState(null);
 
   useEffect(() => {
@@ -51,6 +52,10 @@ const SearchItem = ({ category, data, isPost, token }) => {
     }
   };
 
+  const handlePostNav = async () => {
+    navigate(`${data.id}`);
+  };
+
   if (category === "people") {
     return (
       <Link to={`users/${data.id}`}>
@@ -79,7 +84,7 @@ const SearchItem = ({ category, data, isPost, token }) => {
     const avgRating = data.avg_rating === 10 ? 10 : data.avg_rating.toFixed(1);
     return (
       <article className="movie">
-        <Link to={`movies/${data.id}`} className="movie__poster">
+        <Link to={`/search/movies/${data.id}`} className="movie__poster">
           <img
             src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
             alt={`poster of ${data.title}`}
@@ -87,7 +92,10 @@ const SearchItem = ({ category, data, isPost, token }) => {
         </Link>
         <div className="movie__section">
           <div className="movie__info">
-            <Link to={`movies/${data.id}`} className="movie__info-title">
+            <Link
+              to={`/search/movies/${data.id}`}
+              className="movie__info-title"
+            >
               <h2>{data.title}</h2>
             </Link>
             <h2 className="movie__info-date">
@@ -188,7 +196,11 @@ const SearchItem = ({ category, data, isPost, token }) => {
           </div>
         </div>
         {isPost ? (
-          <button className="movie__upload" type="button">
+          <button
+            className="movie__upload"
+            type="button"
+            onClick={handlePostNav}
+          >
             <img src={uploadIcon} alt="post icon" />
           </button>
         ) : (
