@@ -21,6 +21,8 @@
       display: flex;
       align-items: center;
       height: 3rem;
+      border: 1px solid $mercury;
+      border-left: 0;
     }
   }
   &__categories {
@@ -31,16 +33,24 @@
   &__category {
     height: 3rem;
     width: 50%;
+    background: $lightgrey;
+    color: $moviegram-black;
+    border: 1px solid $mercury;
+    &:hover {
+      color: $white;
+    }
     &--first {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      border-right: 0;
     }
     &--last {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
     &--active {
-      background: $moviegram-darkblue;
+      background: $moviegram-blue;
+      color: $white;
     }
   }
 }

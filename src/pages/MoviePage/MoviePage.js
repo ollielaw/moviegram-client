@@ -246,6 +246,33 @@ const MoviePage = () => {
             <p> {dateStr}</p>
           </div>
           <div className="moviepage__info-item">
+            <h3>Producer: </h3>
+            <p>
+              {
+                movieData.credits.crew.find(({ job }) => job === "Producer")
+                  .name
+              }
+            </p>
+          </div>
+          <div className="moviepage__info-item">
+            <h3>Director: </h3>
+            <p>
+              {
+                movieData.credits.crew.find(({ job }) => job === "Director")
+                  .name
+              }
+            </p>
+          </div>
+          <div className="moviepage__info-item">
+            <h3>Starring: </h3>
+            <p>
+              {movieData.credits.cast
+                .slice(0, 5)
+                .map((member) => `${member.name} (${member.character})`)
+                .join(", ")}
+            </p>
+          </div>
+          <div className="moviepage__info-item">
             <h3>Runtime: </h3>
             <p>{movieData.runtime} minutes</p>
           </div>
