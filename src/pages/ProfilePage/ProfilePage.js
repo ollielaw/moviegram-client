@@ -1,5 +1,6 @@
 import "./ProfilePage.scss";
 import Post from "../../components/Post/Post";
+import backArrow from "../../assets/images/back_arrow.svg";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";

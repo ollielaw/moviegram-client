@@ -1,6 +1,7 @@
 import "./MoviePage.scss";
 import Post from "../../components/Post/Post";
 import uploadIcon from "../../assets/images/upload-review__icon.svg";
+import backArrow from "../../assets/images/back_arrow.svg";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
