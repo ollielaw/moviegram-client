@@ -23,9 +23,14 @@
     margin-right: 2rem;
   }
   &__bio {
+    padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
+    border-bottom: 1px solid $mercury;
   }
   &__bio > * {
     display: inline;
+  }
+  &__reviews {
+    padding: 0 1rem;
   }
 }

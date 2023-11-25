@@ -13,6 +13,9 @@
   }
   &__info {
     padding-left: 1rem;
+    &-reviews {
+      color: $silver;
+    }
   }
 }
 
@@ -47,6 +50,9 @@
     width: 100%;
     &-title {
       max-width: 75%;
+    }
+    &-date {
+      color: $silver;
     }
   }
   &__ratings {

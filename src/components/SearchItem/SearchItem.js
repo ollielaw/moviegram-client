@@ -63,7 +63,7 @@ const SearchItem = ({ category, data, isPost, token }) => {
           <div className="user__info">
             <div className="user__info-names">
               <h3>
-                {data.name} ( {data.username} )
+                {data.name} ({data.username})
               </h3>
             </div>
             <h4 className="user__info-reviews">
@@ -90,7 +90,9 @@ const SearchItem = ({ category, data, isPost, token }) => {
             <Link to={`movies/${data.id}`} className="movie__info-title">
               <h2>{data.title}</h2>
             </Link>
-            <h3 className="movie__info-date">{data.release_date}</h3>
+            <h2 className="movie__info-date">
+              {data.release_date.split("-")[0]}
+            </h2>
           </div>
           <div className="movie__ratings">
             <button

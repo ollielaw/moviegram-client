@@ -91,7 +91,7 @@ const ProfilePage = () => {
         <div className="profile__info-container">
           <div className="profile__info-names">
             <h2>
-              {profile.name} ( {profile.username} )
+              {profile.name} ({profile.username})
             </h2>
             {userId ? (
               <></>
@@ -116,7 +116,11 @@ const ProfilePage = () => {
       </section>
       {profilePosts && profilePosts.length ? (
         <section className="profile__reviews">
-          <h2>Reviews:</h2>
+          <h2>
+            {profilePosts.length === 1
+              ? "1 Review"
+              : `${profilePosts.length} Reviews`}
+          </h2>
           <div className="profile__review-container">
             {profilePosts.map((post) => {
               return (

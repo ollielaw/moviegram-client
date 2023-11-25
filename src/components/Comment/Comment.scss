@@ -1,3 +1,5 @@
+@use "../../styles/partials/variables" as *;
+
 .comment {
   margin: 1.5rem;
   &__header {
@@ -13,5 +15,8 @@
   &__avatar {
     width: 2.25rem;
     margin-right: 0.5rem;
+  }
+  &__timestamp {
+    color: $silver;
   }
 }
