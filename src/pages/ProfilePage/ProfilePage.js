@@ -8,14 +8,19 @@ const ProfilePage = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("JWTtoken");
+  const currUser = sessionStorage.getItem("currUserId");
 
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [profilePosts, setProfilePosts] = useState();
+  const [profilePosts, setProfilePosts] = useState(null);
 
   useEffect(() => {
     if (!token) {
       navigate("/login");
+      return;
+    }
+    if (userId && userId === currUser) {
+      navigate("/profile");
       return;
     }
     const fetchProfile = async () => {
@@ -69,6 +74,7 @@ const ProfilePage = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("JWTtoken");
+    sessionStorage.removeItem("currUserId");
     navigate("/login");
   };
 

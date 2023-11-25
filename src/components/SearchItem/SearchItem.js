@@ -75,12 +75,8 @@ const SearchItem = ({ category, data, isPost, token }) => {
       </Link>
     );
   } else {
-    if (!data.vote_average) return null;
-    const avgRating = data.avg_rating
-      ? data.avg_rating === 10
-        ? 10
-        : data.avg_rating.toFixed(1)
-      : data.vote_average.toFixed(1);
+    if (!data.avg_rating) return null;
+    const avgRating = data.avg_rating === 10 ? 10 : data.avg_rating.toFixed(1);
     return (
       <article className="movie">
         <Link to={`movies/${data.id}`} className="movie__poster">

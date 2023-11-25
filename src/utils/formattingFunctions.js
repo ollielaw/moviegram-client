@@ -42,3 +42,17 @@ export const timestampToDynamic = (timestamp) => {
   }
   return `${yearsAgo} years ago`;
 };
+
+export const priceToString = (price) => {
+  const priceArr = [...String(price)];
+  let priceStr = "";
+  let cnt = 1;
+  for (let i = priceArr.length - 1; i >= 0; i--) {
+    priceStr = priceArr[i] + priceStr;
+    if (cnt % 3 === 0 && i > 0) {
+      priceStr = "," + priceStr;
+    }
+    cnt++;
+  }
+  return "$" + priceStr;
+};

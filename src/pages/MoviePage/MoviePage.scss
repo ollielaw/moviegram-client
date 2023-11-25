@@ -1,0 +1,104 @@
+@use "../../styles/partials/variables" as *;
+
+.moviepage {
+  padding: 0 3rem;
+  padding-top: 2rem;
+  &__hero {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  &__header {
+    display: flex;
+    align-items: first baseline;
+    padding: 1rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid $mercury;
+    border-bottom: 0;
+    &-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: first baseline;
+      flex-grow: 1;
+      padding-right: 1rem;
+    }
+  }
+  &__score {
+    padding-left: 1rem;
+    border-left: 1px solid $mercury;
+    &--good {
+      color: $moviegram-blue;
+    }
+    &--bad {
+      color: $moviegram-red;
+    }
+  }
+  &__ratings {
+    display: flex;
+  }
+  &__rating {
+    border-radius: 0;
+    padding: 0;
+    flex-grow: 1;
+    width: 1rem;
+    background: $lightgrey;
+    border: 1px solid $mercury;
+    border-top: 0;
+    border-left: 0;
+    color: $moviegram-black;
+    &--first {
+      border-left: 1px solid $mercury;
+      border-bottom-left-radius: 4px;
+    }
+    &--last {
+      border-bottom-right-radius: 4px;
+    }
+    &--active {
+      color: $white;
+      background: $moviegram-blue;
+    }
+    &:hover {
+      color: $white;
+    }
+  }
+  &__post-button {
+    height: 3rem;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    & > img {
+      margin-left: 1rem;
+    }
+  }
+  &__details {
+    padding: 0 1rem;
+  }
+  &__overview {
+    & > h2 {
+      padding-top: 1rem;
+    }
+    & > p {
+      padding: 1rem 2rem;
+    }
+  }
+  &__info {
+    & > h2 {
+      padding-top: 1rem;
+    }
+    &-item {
+      padding: 1rem 2rem;
+      display: flex;
+      & > h3 {
+        padding-right: 0.25rem;
+      }
+    }
+  }
+  &__reviews {
+    padding: 0 1rem;
+    & > h2 {
+      padding-top: 1rem;
+    }
+  }
+}

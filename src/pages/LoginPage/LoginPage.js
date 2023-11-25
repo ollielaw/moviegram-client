@@ -43,6 +43,12 @@ const LoginPage = () => {
         }
       );
       sessionStorage.setItem("JWTtoken", data.token);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/user`, {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      });
+      sessionStorage.setItem("currUserId", res.data.id);
       setIsLoginError(false);
       setErrorMessage("");
       setEmail("");

@@ -20,16 +20,26 @@
     width: 2.25rem;
     margin-right: 0.5rem;
   }
-
+  &__timestamp {
+    color: $silver;
+  }
   &__poster {
     width: 100%;
     object-fit: cover;
     object-position: center;
     border-radius: 4px;
   }
-  &__rating-section {
-    text-align: center;
-    margin: 0.5rem 0;
+  &__rating {
+    &-section {
+      text-align: center;
+      margin: 0.5rem 0;
+    }
+    &--good {
+      color: $moviegram-blue;
+    }
+    &--bad {
+      color: $moviegram-red;
+    }
   }
   &__cta-section {
     display: flex;
@@ -50,6 +60,9 @@
       margin-right: 0;
     }
   }
+  &__like-cnt {
+    color: $silver;
+  }
   &__review-section * {
     display: inline;
   }
@@ -60,7 +73,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0.5rem 0;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
   }
   &__input {
     flex-grow: 1;
@@ -74,5 +88,6 @@
   &__view-toggle {
     cursor: pointer;
     display: inline;
+    color: $silver;
   }
 }
