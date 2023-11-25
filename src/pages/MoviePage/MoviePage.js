@@ -111,207 +111,217 @@ const MoviePage = () => {
 
   return (
     <main className="moviepage">
-      <section className="moviepage__hero">
-        <header className="moviepage__header">
-          <div className="moviepage__header-info">
-            <h1 className="moviepage__header-info-title">{movieData.title}</h1>
-            <h1 className="moviepage__header-info-date">
-              ({movieData.release_date.split("-")[0]})
-            </h1>
-          </div>
-          <div className="moviepage__score">
-            <h1
-              className={`${
-                avgRating >= 5
-                  ? "moviepage__score--good"
-                  : "moviepage__score--bad"
+      <img
+        src={backArrow}
+        alt="back navigation button"
+        className="moviepage__backarrow"
+        onClick={() => navigate(-1)}
+      />
+      <div className="moviepage__wrapper">
+        <section className="moviepage__hero">
+          <header className="moviepage__header">
+            <div className="moviepage__header-info">
+              <h1 className="moviepage__header-info-title">
+                {movieData.title}
+              </h1>
+              <h1 className="moviepage__header-info-date">
+                ({movieData.release_date.split("-")[0]})
+              </h1>
+            </div>
+            <div className="moviepage__score">
+              <h1
+                className={`${
+                  avgRating >= 5
+                    ? "moviepage__score--good"
+                    : "moviepage__score--bad"
+                }`}
+              >
+                {avgRating} / 10
+              </h1>
+            </div>
+          </header>
+          <img
+            src={`https://image.tmdb.org/t/p/original${movieData.backdrop_path}`}
+            alt={`backdrop of movie titled ${movieData.title}`}
+          />
+          <div className="moviepage__ratings">
+            <button
+              className={`moviepage__rating moviepage__rating--first ${
+                userRating === 1 ? "moviepage__rating--active" : ""
               }`}
+              onClick={() => updateUserRating(1)}
+              type="button"
             >
-              {avgRating} / 10
-            </h1>
+              1
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 2 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(2)}
+              type="button"
+            >
+              2
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 3 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(3)}
+              type="button"
+            >
+              3
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 4 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(4)}
+              type="button"
+            >
+              4
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 5 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(5)}
+              type="button"
+            >
+              5
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 6 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(6)}
+              type="button"
+            >
+              6
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 7 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(7)}
+              type="button"
+            >
+              7
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 8 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(8)}
+              type="button"
+            >
+              8
+            </button>
+            <button
+              className={`moviepage__rating ${
+                userRating === 9 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(9)}
+              type="button"
+            >
+              9
+            </button>
+            <button
+              className={`moviepage__rating moviepage__rating--last ${
+                userRating === 10 ? "moviepage__rating--active" : ""
+              }`}
+              onClick={() => updateUserRating(10)}
+              type="button"
+            >
+              10
+            </button>
           </div>
-        </header>
-        <img
-          src={`https://image.tmdb.org/t/p/original${movieData.backdrop_path}`}
-          alt={`backdrop of movie titled ${movieData.title}`}
-        />
-        <div className="moviepage__ratings">
           <button
-            className={`moviepage__rating moviepage__rating--first ${
-              userRating === 1 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(1)}
             type="button"
+            className="moviepage__post-button"
+            onClick={() => navigate(`/post/${movieData.id}`)}
           >
-            1
+            Add a review <img src={uploadIcon} alt="upload new review icon" />
           </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 2 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(2)}
-            type="button"
-          >
-            2
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 3 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(3)}
-            type="button"
-          >
-            3
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 4 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(4)}
-            type="button"
-          >
-            4
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 5 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(5)}
-            type="button"
-          >
-            5
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 6 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(6)}
-            type="button"
-          >
-            6
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 7 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(7)}
-            type="button"
-          >
-            7
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 8 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(8)}
-            type="button"
-          >
-            8
-          </button>
-          <button
-            className={`moviepage__rating ${
-              userRating === 9 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(9)}
-            type="button"
-          >
-            9
-          </button>
-          <button
-            className={`moviepage__rating moviepage__rating--last ${
-              userRating === 10 ? "moviepage__rating--active" : ""
-            }`}
-            onClick={() => updateUserRating(10)}
-            type="button"
-          >
-            10
-          </button>
-        </div>
-        <button
-          type="button"
-          className="moviepage__post-button"
-          onClick={() => navigate(`/post/${movieData.id}`)}
-        >
-          Add a review <img src={uploadIcon} alt="upload new review icon" />
-        </button>
-      </section>
-      <section className="moviepage__details">
-        <article className="moviepage__overview">
-          <h2>Overview</h2>
-          <p>{movieData.overview}</p>
-        </article>
-        <section className="moviepage__info">
-          <h2>Details</h2>
-          <div className="moviepage__info-item">
-            <h3>Genres: </h3>
-            <p>{movieData.genres.map(({ name }) => name).join(", ")}</p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Release Date: </h3>
-            <p> {dateStr}</p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Producer: </h3>
-            <p>
-              {
-                movieData.credits.crew.find(({ job }) => job === "Producer")
-                  .name
-              }
-            </p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Director: </h3>
-            <p>
-              {
-                movieData.credits.crew.find(({ job }) => job === "Director")
-                  .name
-              }
-            </p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Starring: </h3>
-            <p>
-              {movieData.credits.cast
-                .slice(0, 5)
-                .map((member) => `${member.name} (${member.character})`)
-                .join(", ")}
-            </p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Runtime: </h3>
-            <p>{movieData.runtime} minutes</p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Budget: </h3>
-            <p>{priceToString(movieData.budget)}</p>
-          </div>
-          <div className="moviepage__info-item">
-            <h3>Revenue: </h3>
-            <p>{priceToString(movieData.revenue)}</p>
-          </div>
         </section>
-      </section>
-      {moviePosts && moviePosts.length ? (
-        <section className="moviepage__reviews">
-          <h2>
-            {movieData.num_posts} Review{movieData.num_posts === 1 ? "" : "s"}
-          </h2>
-          <div className="moviepage__review-container">
-            {moviePosts.map((post) => {
-              return (
-                <Post
-                  key={post.id}
-                  data={post}
-                  userData={userData}
-                  token={token}
-                />
-              );
-            })}
-          </div>
+        <section className="moviepage__details">
+          <article className="moviepage__overview">
+            <h2>Overview</h2>
+            <p>{movieData.overview}</p>
+          </article>
+          <section className="moviepage__info">
+            <h2>Details</h2>
+            <div className="moviepage__info-item">
+              <h3>Genres: </h3>
+              <p>{movieData.genres.map(({ name }) => name).join(", ")}</p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Release Date: </h3>
+              <p> {dateStr}</p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Producer: </h3>
+              <p>
+                {
+                  movieData.credits.crew.find(({ job }) => job === "Producer")
+                    .name
+                }
+              </p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Director: </h3>
+              <p>
+                {
+                  movieData.credits.crew.find(({ job }) => job === "Director")
+                    .name
+                }
+              </p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Starring: </h3>
+              <p>
+                {movieData.credits.cast
+                  .slice(0, 5)
+                  .map((member) => `${member.name} (${member.character})`)
+                  .join(", ")}
+              </p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Runtime: </h3>
+              <p>{movieData.runtime} minutes</p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Budget: </h3>
+              <p>{priceToString(movieData.budget)}</p>
+            </div>
+            <div className="moviepage__info-item">
+              <h3>Revenue: </h3>
+              <p>{priceToString(movieData.revenue)}</p>
+            </div>
+          </section>
         </section>
-      ) : (
-        <></>
-      )}
+        {moviePosts && moviePosts.length ? (
+          <section className="moviepage__reviews">
+            <h2>
+              {movieData.num_posts} Review{movieData.num_posts === 1 ? "" : "s"}
+            </h2>
+            <div className="moviepage__review-container">
+              {moviePosts.map((post) => {
+                return (
+                  <Post
+                    key={post.id}
+                    data={post}
+                    userData={userData}
+                    token={token}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        ) : (
+          <></>
+        )}
+      </div>
     </main>
   );
 };

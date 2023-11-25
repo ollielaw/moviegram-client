@@ -1,8 +1,21 @@
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
 
 .moviepage {
-  padding: 0 3rem;
-  padding-top: 2rem;
+  padding: 0 2rem;
+  padding-top: 1rem;
+  &__backarrow {
+    margin-bottom: 1rem;
+    width: 2.25rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__wrapper {
+    @include tablet {
+      padding: 0 2rem;
+    }
+  }
   &__hero {
     width: 100%;
     display: flex;
@@ -70,7 +83,7 @@
   }
   &__post-button {
     height: 3rem;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     padding: 0 1.5rem;
     display: flex;
     align-items: center;

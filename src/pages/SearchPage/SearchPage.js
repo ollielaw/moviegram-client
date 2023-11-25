@@ -30,7 +30,7 @@ const SearchPage = ({ isPost }) => {
       }
     };
     fetchInitialResults();
-  }, []);
+  }, [isPost]);
 
   const handleSearch = async (e) => {
     e.preventDefault();

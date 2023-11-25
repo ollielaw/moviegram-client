@@ -2,11 +2,15 @@
 
 .user {
   padding: 1rem;
-  margin: 1rem auto;
   display: flex;
-  width: 50%;
+  width: 100%;
   border-radius: 0.25rem;
   border: 1px solid $mercury;
+  &__wrapper {
+    width: 50%;
+    margin: 1rem auto;
+    display: flex;
+  }
   &__avatar {
     padding-right: 1rem;
     border-right: 1px solid $mercury;

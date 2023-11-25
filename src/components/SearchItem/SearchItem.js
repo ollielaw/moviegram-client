@@ -58,7 +58,7 @@ const SearchItem = ({ category, data, isPost, token }) => {
 
   if (category === "people") {
     return (
-      <Link to={`users/${data.id}`}>
+      <Link to={`users/${data.id}`} className="user__wrapper">
         <article className="user">
           <img
             src={data.avatar_url}
