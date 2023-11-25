@@ -17,6 +17,9 @@
   &__message {
     padding-bottom: 1rem;
     color: $moviegram-red;
+    width: 75%;
+    min-width: 20rem;
+    max-width: 25rem;
   }
   &__form {
     display: flex;

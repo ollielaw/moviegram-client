@@ -5,8 +5,7 @@ import axios from "axios";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const [isRegisterError, setIsRegisterError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -24,43 +23,45 @@ const RegisterPage = () => {
   }, []);
 
   const isEmailValid = () => {
-    if (!email) return false;
-    return true;
-  };
-
-  const isNameValid = () => {
-    if (!name) return false;
-    return true;
+    return email && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   };
 
   const isUsernameValid = () => {
-    if (!username) return false;
-    return true;
+    return /^[\w-\.]+$/.test(username);
   };
 
   const isPasswordValid = () => {
-    if (!password) return false;
-    return true;
-  };
-
-  const isConfirmPasswordValid = () => {
-    if (password === confirmPassword) {
-      return true;
-    }
-    return false;
+    return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}/.test(password);
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (
-      !(
-        isEmailValid() &&
-        isNameValid() &&
-        isUsernameValid() &&
-        isPasswordValid &&
-        isConfirmPasswordValid()
-      )
-    ) {
+    if (!isEmailValid()) {
+      setError("Must enter a valid email address.");
+      return;
+    }
+    if (!name) {
+      setError("Must enter your name.");
+      return;
+    }
+    if (!username) {
+      setError("Must enter a username.");
+      return;
+    }
+    if (!isUsernameValid()) {
+      setError(
+        "Username can only contain letters, numbers, hyphens(-), underscores(_), and periods(.)."
+      );
+      return;
+    }
+    if (!isPasswordValid()) {
+      setError(
+        "Password must be 8-15 characters long with at least one uppercase letter, one lowercase letter, and one digit."
+      );
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords must match.");
       return;
     }
     try {
@@ -74,14 +75,14 @@ const RegisterPage = () => {
       });
       navigate("/login");
     } catch (error) {
-      setErrorMessage(error.message);
-      setIsRegisterError(true);
+      setError(error.response.data.message);
     }
   };
 
   return (
     <main className="register">
-      <h1 className="register_header">MovieGram</h1>
+      <h1 className="register__header">MovieGram</h1>
+      {error && <div className="register__message">{error}</div>}
       <form className="register__form" onSubmit={handleRegister}>
         <input
           className="register__input"
@@ -103,7 +104,7 @@ const RegisterPage = () => {
           className="register__input"
           type="text"
           name="bio"
-          placeholder="Bio"
+          placeholder="Bio (optional)"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
@@ -117,7 +118,7 @@ const RegisterPage = () => {
         />
         <input
           className="register__input"
-          type="text"
+          type="password"
           name="password"
           placeholder="Password"
           value={password}
@@ -125,7 +126,7 @@ const RegisterPage = () => {
         />
         <input
           className="register__input"
-          type="text"
+          type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
           value={confirmPassword}
@@ -134,7 +135,10 @@ const RegisterPage = () => {
         <button className="register__button">Sign Up</button>
       </form>
       <p>
-        Already have an account? <Link to="/login">Login Here.</Link>
+        Already have an account?{" "}
+        <Link className="register__login" to="/login">
+          Login Here.
+        </Link>
       </p>
     </main>
   );

@@ -1,0 +1,42 @@
+@use "../../styles/partials/variables" as *;
+
+.register {
+  margin: 8rem auto;
+  width: 75%;
+  min-width: 24rem;
+  max-width: 29rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid $mercury;
+  &__header {
+    padding-bottom: 1rem;
+  }
+  &__message {
+    padding-bottom: 1rem;
+    color: $moviegram-red;
+    width: 75%;
+    min-width: 20rem;
+    max-width: 25rem;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+    width: 75%;
+    min-width: 20rem;
+    max-width: 25rem;
+  }
+  &__input {
+    margin-bottom: 1rem;
+  }
+
+  &__login {
+    color: $moviegram-blue;
+    &:hover {
+      color: $moviegram-darkblue;
+    }
+  }
+}
