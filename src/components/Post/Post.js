@@ -17,6 +17,8 @@ const Post = ({ data, userData, token }) => {
   const [isLiked, setIsLiked] = useState(data.user_liked);
   const [numLikes, setNumLikes] = useState(data.num_likes);
 
+  const isUserPost = data.user_id === userData.id;
+
   const isCommentValid = () => {
     return Boolean(comment);
   };
@@ -129,6 +131,20 @@ const Post = ({ data, userData, token }) => {
           <Link to={`/search/users/${data.user_id}`}>
             <h3 className="post__username">{data.username}</h3>
           </Link>
+          {isUserPost && (
+            <>
+              <button
+                type="button"
+                className="post__edit"
+                onClick={() => navigate(`/post/${data.tmdb_id}`)}
+              >
+                Edit
+              </button>
+              <button type="button" className="post__delete">
+                Delete
+              </button>
+            </>
+          )}
         </div>
         <h3 className="post__timestamp">
           {timestampToDynamic(Date.parse(data.created_at))}

@@ -20,6 +20,18 @@
     width: 2.25rem;
     margin-right: 0.5rem;
   }
+  &__edit {
+    margin-left: 1rem;
+    border-radius: 1.25rem;
+  }
+  &__delete {
+    margin-left: 1rem;
+    border-radius: 1.25rem;
+    background: $moviegram-red;
+    &:hover {
+      background-color: $moviegram-darkred;
+    }
+  }
   &__timestamp {
     color: $silver;
   }
