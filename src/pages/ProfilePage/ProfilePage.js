@@ -83,61 +83,69 @@ const ProfilePage = () => {
 
   return (
     <main className="profile">
-      <section className="profile__info">
-        <img
-          className="profile__avatar avatar"
-          src={profile.avatar_url}
-          alt={`avatar of ${profile.name}`}
-        />
-        <div className="profile__info-container">
-          <div className="profile__info-names">
-            <h2>
-              {profile.name} ({profile.username})
-            </h2>
-            {userId ? (
-              <></>
-            ) : (
-              <button
-                className="profile__signout-button"
-                onClick={handleLogout}
-              >
-                Log out
-              </button>
-            )}
-          </div>
-          <h3 className="reviews">
-            {profile.num_posts ? profile.num_posts : "0"} review
-            {profile.num_posts === 1 ? "" : "s"}
-          </h3>
-        </div>
-      </section>
-      <section className="profile__bio">
-        <h3 className="profile__bio-heading">About me: </h3>
-        <p className="profile__bio-content">{profile.bio}</p>
-      </section>
-      {profilePosts && profilePosts.length ? (
-        <section className="profile__reviews">
-          <h2>
-            {profilePosts.length === 1
-              ? "1 Review"
-              : `${profilePosts.length} Reviews`}
-          </h2>
-          <div className="profile__review-container">
-            {profilePosts.map((post) => {
-              return (
-                <Post
-                  key={post.id}
-                  data={post}
-                  userData={userData}
-                  token={token}
-                />
-              );
-            })}
+      <img
+        src={backArrow}
+        alt="back navigation button"
+        className="profile__backarrow"
+        onClick={() => navigate(-1)}
+      />
+      <div className="profile__wrapper">
+        <section className="profile__info">
+          <img
+            className="profile__avatar avatar"
+            src={profile.avatar_url}
+            alt={`avatar of ${profile.name}`}
+          />
+          <div className="profile__info-container">
+            <div className="profile__info-names">
+              <h2>
+                {profile.name} ({profile.username})
+              </h2>
+              {userId ? (
+                <></>
+              ) : (
+                <button
+                  className="profile__signout-button"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              )}
+            </div>
+            <h3 className="reviews">
+              {profile.num_posts ? profile.num_posts : "0"} review
+              {profile.num_posts === 1 ? "" : "s"}
+            </h3>
           </div>
         </section>
-      ) : (
-        <></>
-      )}
+        <section className="profile__bio">
+          <h3 className="profile__bio-heading">About me: </h3>
+          <p className="profile__bio-content">{profile.bio}</p>
+        </section>
+        {profilePosts && profilePosts.length ? (
+          <section className="profile__reviews">
+            <h2>
+              {profilePosts.length === 1
+                ? "1 Review"
+                : `${profilePosts.length} Reviews`}
+            </h2>
+            <div className="profile__review-container">
+              {profilePosts.map((post) => {
+                return (
+                  <Post
+                    key={post.id}
+                    data={post}
+                    userData={userData}
+                    token={token}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        ) : (
+          <></>
+        )}
+      </div>
     </main>
   );
 };

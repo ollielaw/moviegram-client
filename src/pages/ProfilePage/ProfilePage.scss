@@ -1,10 +1,23 @@
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
 
 .profile {
-  padding: 0 3rem;
+  padding: 0 2rem;
+  padding-top: 1rem;
+  &__backarrow {
+    margin-bottom: 1rem;
+    width: 2.25rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__wrapper {
+    @include tablet {
+      padding: 0 2rem;
+    }
+  }
   &__info {
     display: flex;
-    margin-top: 2rem;
     margin-bottom: 1rem;
     &-container {
       display: flex;
