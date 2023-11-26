@@ -114,6 +114,7 @@ const SearchPage = ({ isPost }) => {
             name="query"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            autoComplete="off"
           />
           <button className="search__button">
             <img

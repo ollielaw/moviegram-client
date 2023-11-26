@@ -92,6 +92,7 @@ const RegisterPage = () => {
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
         />
         <input
           className="register__input"
@@ -100,6 +101,7 @@ const RegisterPage = () => {
           placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          autoComplete="name"
         />
         <input
           className="register__input"
@@ -108,6 +110,7 @@ const RegisterPage = () => {
           placeholder="Bio (optional)"
           value={bio}
           onChange={(e) => setBio(e.target.value)}
+          autoComplete="off"
         />
         <input
           className="register__input"
@@ -116,6 +119,7 @@ const RegisterPage = () => {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          autoComplete="username"
         />
         <input
           className="register__input"
@@ -124,6 +128,7 @@ const RegisterPage = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
         />
         <input
           className="register__input"
@@ -132,6 +137,7 @@ const RegisterPage = () => {
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete="off"
         />
         <button className="register__button">Sign Up</button>
       </form>

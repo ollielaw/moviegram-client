@@ -113,6 +113,11 @@
       border-bottom-right-radius: 0;
       border: 1px solid $mercury;
       border-right: 0;
+      background: $lightgrey;
+      color: $moviegram-black;
+      &:hover {
+        color: $white;
+      }
     }
     &-share {
       width: 1rem;

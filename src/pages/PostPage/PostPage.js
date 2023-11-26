@@ -112,7 +112,7 @@ const PostPage = () => {
         navigate("/");
         return;
       }
-      const res = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_URL}/api/posts`,
         newReview,
         {
@@ -261,6 +261,8 @@ const PostPage = () => {
             }
             placeholder="Write a review (optional)"
             rows={6}
+            name="caption"
+            autoComplete="off"
           />
           <div className="postpage__button-container">
             <button

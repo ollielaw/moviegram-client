@@ -237,8 +237,10 @@ const Post = ({ data, userData, token, handlePostDelete }) => {
           className="comments__input"
           type="text"
           placeholder="Add a new comment..."
+          name="comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          autoComplete="off"
         />
         <button className="comments__button">Post</button>
       </form>
