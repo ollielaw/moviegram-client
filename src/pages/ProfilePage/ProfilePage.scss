@@ -4,6 +4,9 @@
 .profile {
   padding: 0 2rem;
   padding-top: 1rem;
+  &--self {
+    padding-top: 2rem;
+  }
   &__backarrow {
     margin-bottom: 1rem;
     width: 2.25rem;
@@ -51,6 +54,31 @@
     display: inline;
   }
   &__reviews {
-    padding: 0 1rem;
+    margin: 0 1rem;
+    padding-top: 1.5rem;
+  }
+  &__favorites {
+    margin: 0 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $mercury;
+    & > h2 {
+      padding-bottom: 1rem;
+    }
+  }
+  &__favorite {
+    width: calc(20% - 2rem);
+    margin: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    & > img {
+      width: 100%;
+      border-radius: 0.25rem;
+      border: 1px solid $mercury;
+      box-shadow: 0 2px 5px 0 rgba(19, 24, 44, 0.1);
+    }
+    &-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }

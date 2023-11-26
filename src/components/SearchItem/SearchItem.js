@@ -81,6 +81,7 @@ const SearchItem = ({ category, data, isPost, token }) => {
     );
   } else {
     if (!data.avg_rating) return null;
+    if (!data.poster_path) return <></>;
     const avgRating = data.avg_rating === 10 ? 10 : data.avg_rating.toFixed(1);
     return (
       <article className="movie">

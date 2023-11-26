@@ -2,7 +2,7 @@ import "./ProfilePage.scss";
 import Post from "../../components/Post/Post";
 import backArrow from "../../assets/images/back_arrow.svg";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 const ProfilePage = () => {
@@ -13,6 +13,7 @@ const ProfilePage = () => {
 
   const [profile, setProfile] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [favorites, setFavorites] = useState(null);
   const [profilePosts, setProfilePosts] = useState(null);
 
   useEffect(() => {
@@ -54,6 +55,15 @@ const ProfilePage = () => {
             }
           );
           setProfilePosts(data);
+          const favRes = await axios.get(
+            `${process.env.REACT_APP_API_URL}/api/profiles/${userId}/favorites`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setFavorites(favRes.data);
         } else {
           setProfile(response.data);
           const { data } = await axios.get(
@@ -65,6 +75,15 @@ const ProfilePage = () => {
             }
           );
           setProfilePosts(data);
+          const favRes = await axios.get(
+            `${process.env.REACT_APP_API_URL}/api/user/favorites`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setFavorites(favRes.data);
         }
       } catch (error) {
         console.error(error);
@@ -96,16 +115,22 @@ const ProfilePage = () => {
     }
   };
 
-  if (!(profile && userData)) return null;
+  if (!(profile && userData && favorites)) return null;
 
   return (
-    <main className="profile">
-      <img
-        src={backArrow}
-        alt="back navigation button"
-        className="profile__backarrow"
-        onClick={() => navigate(-1)}
-      />
+    <main
+      className={`profile ${
+        profile.id === Number(currUser) ? "profile--self" : ""
+      }`}
+    >
+      {profile.id !== userData.id && (
+        <img
+          src={backArrow}
+          alt="back navigation button"
+          className="profile__backarrow"
+          onClick={() => navigate(-1)}
+        />
+      )}
       <div className="profile__wrapper">
         <section className="profile__info">
           <img
@@ -139,6 +164,35 @@ const ProfilePage = () => {
           <h3 className="profile__bio-heading">About me: </h3>
           <p className="profile__bio-content">{profile.bio}</p>
         </section>
+        {favorites && favorites.length ? (
+          <section className="profile__favorites">
+            <h2>Favorite Movies</h2>
+            <div className="profile__favorite-container">
+              {favorites.map((fav, i) => {
+                return (
+                  <Link
+                    className={`profile__favorite ${
+                      !i && favorites.length > 1
+                        ? "profile__favorite--first"
+                        : i === favorites.length - 1 && i
+                        ? "profile__favorite--last"
+                        : ""
+                    }`}
+                    to={`/search/movies/${fav.tmdb_id}`}
+                    key={fav.id}
+                  >
+                    <img
+                      src={`https://image.tmdb.org/t/p/original${fav.poster_url}`}
+                      alt={`poster for ${fav.movie_name}`}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        ) : (
+          <></>
+        )}
         {profilePosts && profilePosts.length ? (
           <section className="profile__reviews">
             <h2>

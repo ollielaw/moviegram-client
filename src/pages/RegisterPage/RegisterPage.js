@@ -73,6 +73,7 @@ const RegisterPage = () => {
         username,
         password,
       });
+      window.alert("Successfully registered MovieGram account!");
       navigate("/login");
     } catch (error) {
       setError(error.response.data.message);

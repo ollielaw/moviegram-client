@@ -175,7 +175,10 @@ const Post = ({ data, userData, token, handlePostDelete }) => {
           {timestampToDynamic(Date.parse(data.created_at))}
         </h3>
       </header>
-      <Link to={`/search/movies/${data.tmdb_id}`}>
+      <Link
+        className="post__poster-wrapper"
+        to={`/search/movies/${data.tmdb_id}`}
+      >
         <img
           src={`https://image.tmdb.org/t/p/original${data.poster_url}`}
           alt={`poster of ${data.movie_name}`}
@@ -183,13 +186,13 @@ const Post = ({ data, userData, token, handlePostDelete }) => {
         />
       </Link>
       <div className="post__rating-section">
-        <h2
+        <h1
           className={
             data.rating >= 5 ? "post__rating--good" : "post__rating--bad"
           }
         >
           {data.rating} / 10
-        </h2>
+        </h1>
       </div>
       <div className="post__cta-section">
         <div className="post__icon-container">

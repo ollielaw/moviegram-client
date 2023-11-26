@@ -18,6 +18,7 @@ const SearchPage = ({ isPost }) => {
       navigate("/login");
       return;
     }
+    setSearchQuery("");
     const fetchInitialResults = async () => {
       if (isPost) {
         setSearchCategory("movies");
