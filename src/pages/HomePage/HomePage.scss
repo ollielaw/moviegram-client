@@ -4,6 +4,11 @@
 .feed {
   &__wrapper {
     padding: 0 4rem;
+    @include desktop {
+      padding: 0;
+      width: 1080px;
+      margin: 0 auto;
+    }
   }
   &__toggles {
     padding: 2rem 0;

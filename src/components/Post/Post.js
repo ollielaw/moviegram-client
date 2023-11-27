@@ -177,7 +177,9 @@ const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
       </header>
       {isBackdrop ? (
         <section className="post__title">
-          <h2>{data.movie_name}</h2>
+          <Link to={`/search/movies/${data.tmdb_id}`}>
+            <h2>{data.movie_name}</h2>
+          </Link>
         </section>
       ) : (
         <></>
