@@ -95,6 +95,7 @@ const ProfilePage = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("JWTtoken");
     sessionStorage.removeItem("currUserId");
+    sessionStorage.removeItem("display");
     navigate("/login");
   };
 
