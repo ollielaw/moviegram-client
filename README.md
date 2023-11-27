@@ -1,189 +1,184 @@
-# MovieGram
+# MovieGram - Client
+
+This is the front-end/client for my full-stack web application **MovieGram**.
+
+## Server - https://github.com/ollielaw/moviegram-server.git
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Preview](#preview)
 
 ## Overview
 
-MovieGram is a social media / networking web application, in which the primary media form is movie reviews. Users, once registered, will
-have access to a feed comprised of movie reviews (poster, rating, review, comments section) from users they follow. Ultimately, the
-application will enable efficient sharing and recommendations for movies, so that users are able to make better movie-watching decisions.
+Welcome to MovieGram! This is a social media web application, in which the primary media
+form is movie reviews. Users, once registered, have access to a media feed comprised
+of movie reviews from other users, with which they can interact by liking or commenting.
+Users are also able to search for other users (to view their profiles), search for movies
+(to find a detailed profile page, to add a quick rating of the movie, or share a public
+review of the movie).
 
-### Problem
+This platform ultimately enables movie lovers to recommend and share their thoughts on movies
+they've seen, and to find new viewing material via the reviews, ratings, and recommendations
+of others. Moreover, by interacting with site, users are able to contribute to global ratings
+of movies and to build a profile comprised of their favorite movies and all their past
+reviews.
 
-Given the vast array of available movies and numerous streaming options, I've found that choosing a movie to watch can be a difficult
-and time-consuming endevour. Moreover, while there are social media platforms that currently enable people to share movie recommendations
-and reviews (e.g., Instagram, TikTok, etc.), I've yet to find one that specializes in that functionality. My web application offers a
-solution to this problem through specialization: restricting media to only movie-related content.
+## Technologies Used
 
-### User Profile
+- React
+- Sass
+- JSX
+- Axios
+- react-modal
+- react-router-dom
 
-The user profile of this application is very broad: anyone who watches movies. The use case is to enable users to share their opinions
-about movies, interact with others' opinions, make recommendations, and find inspiration for new movies to watch.
+## Features
 
-### Features
+1. **User Authentication:**
+   Users can register and login to their personalized accounts from which they have authorization
+   to all pages of the site.
 
-- User login / authentification / account creation
-- Media feed comprised of movie reviews shared by other users they follow
-- Ability to comment on and like other users' posts
-- Post / Review creation and sharing
-- Profile customization (avatar, bio, username, favorite movies, etc.)
-- Access to movie details pages through search (with filtering options)
-- Access to other user profiles through search (with filtering options)
-- Ability to give a movie a rating without creating a post
-- Ability to recommend a movie to another user directly (messaging functionality) (nice to have)
+2. **Media Feed:**
+   Users have access to a media feed comprised of all public movie reviews (ordered by post creation
+   recency). They can toggle the view of posts to show either movie posters (portrait) or movie
+   backdrops (landscape) to optimize viewing experience for a given users preference. They can interact
+   with the posts on the feed by liking or commenting.
 
-## Implementation
+3. **Search:**
+   Users can search for other users, through search query which matches on a user's name or username,
+   and then navigate to their profile. Users can search for movies, by query or simply by a popularity
+   ordered list, from a database of over 800,000 movies, and then give a quick rating or navigate to
+   the movies landing page for more detailed information. Users can also search movies with the specific
+   intention of sharing a new review.
 
-### Tech Stack
+4. **Quick Rating:**
+   Users can give movies a quick rating from 1 to 10, which contributes to a movies overall/average
+   rating as shown on the movie search and movie details pages, and to the user's favorite movie
+   collection which is displayed on their profile
 
-- React (axios, react-router-dom, jsx, sass)
-- Node (express, cors, dotenv, knex, mysql)
-- MySQL
+5. **Post Creation:**
+   Users can share reviews of movies, for which they must provide a rating and can optionally include a
+   written review. Once reviews are shared they can be seen and interacted with across the application.
+   Movie review posts are displayed either with their poster or backdrop image, depending on the
+   preferences of the viewer.
 
-### APIs
+6. **Updating and Deleting Shared Content:**
+   Users have the ability to delete reviews, comments, and likes which they have authored. And, they have
+   the ability to update reviews and quick ratings that they have given to movies
 
-- The Movie Database API
-- YouTube API (nice to have)
+7. **User Profile:**
+   Each user has a unique profile which consists of their basic info (name and unique username), a unique
+   avatar which is generated through their username, the number of reviews they've posted, a collection of
+   their 10 highest rated movies (must have rating >= 8) displayed as a grid of poster images, and all of
+   their publicly shared movie reviews. Through the current user's own profile, they also have the ability to
+   log out of their account.
 
-### Sitemap
+8. **Movie Page:**
+   Every movie contained in the extensive database of movies has its own landing page. The landing page consists
+   of the movie's backdrop image, basic information (including title, release date, director, cast, budget, etc.),
+   average user rating (if no MovieGram user has provided a rating, then this is the TMDB average rating), current
+   user's rating, all reviews posted about the movie, and easy navigation to share a review or give a quick rating.
 
-- Login Page
-- Registration Page
-- User Profile Page
-- Movie Profile Page
-- Search Page
-- Media Feed Page
-- Contacts / Followers / Following Page
-- Post Creation Page
-- Explore / Recommendations Page (nice to have)
-- Chat / Messenger Page (nice to have)
+## Getting Started
 
-### Mockups
+1. Clone the repository:
 
-### Data
+- https://github.com/ollielaw/moviegram-client.git
 
-#### MySQL Database Tables:
+2. Install dependencies:
 
-##### Users
+```bash
+npm i
+```
 
-- id (PK) (increments, primary)
-- username / handle (string, not-nullable, unique?)
-- display_name (string, not-nullable)
-- email (string, not-nullable)
-- password (string, not-nullable, encrypted?)
-- profile_pic / avatar (string/url)
-- bio (string, character limit)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+3. Set the API base URL to your local server URL in a `.env` file:
 
-##### Movies
+- REACT_APP_API_URL = ???
 
-- id (PK) (increments, primary)
-- movie_name (string, not-nullable)
-- tmdb_id (integer, unsigned, not-nullable)
-- rating (number)
-- trailer_url? (YouTube API?) (nice to have)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+4. Follow the instructions to set up the MovieGram server:
 
-##### Posts / Reviews
+- https://github.com/ollielaw/moviegram-server#getting-started
 
-- id (PK) (increments, primary)
-- user_id (FK) (integer, unsigned, not-nullable, references)
-- movie_id (FK) (integer, unsigned, not-nullable, references)
-- poster_url (string/url)
-- caption (string, character limit)
-- rating (enum, not-nullable)
-- where_to_stream (check API documentation?) (nice to have?)
-- is_post (enum, not-nullable)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+5. Run the client:
 
-##### Comments
+```bash
+npm start
+```
 
-- id (PK) (increments, primary)
-- content (string, character limit)
-- post_id (FK) (integer, unsigned, not-nullable, references)
-- user_id (FK) (integer, unsigned, not-nullable, references)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+6. Either register an account, login to a seed account (email and password can be found in seed data), or use:
 
-##### Likes
+- email: ollielaw@moviegram.com
+- password: Password123
 
-- id (PK) (increments, primary)
-- user_id (FK) (integer, unsigned, not-nullable, references)
-- post_id (FK) (integer, unsigned, not-nullable, references)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+## Preview
 
-##### Follows
+### Register Page:
 
-- id (PK) (increments, primary)
-- follower_id (FK) (integer, unsigned, not-nullable, references)
-- followee_id (FK) (integer, unsigned, not-nullable, references)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+![IMG_1](/screenshots/register1.png)
 
-##### Conversations (nice to have)
+### Login Page:
 
-- id (PK) (increments, primary)
-- name (string, character limit?)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+![IMG_2](/screenshots/login1.png)
 
-##### Messages (nice to have)
+### Media Feed:
 
-- id (PK) (increments, primary)
-- conversation_id (FK) (integer, unsigned, not-nullable, references)
-- sender_id (FK) (integer, unsigned, not-nullable, references)
-- text_content (string, character limit?)
-- movie_id (FK) (integer, unsigned, not-nullable, references)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+![IMG_3](/screenshots/feed1.png)
 
-##### Conversation_members (nice to have)
+![IMG_4](/screenshots/feed2.png)
 
-- id (PK) (increments, primary)
-- conversation_id (FK) (integer, unsigned, not-nullable, references)
-- user_id (FK) (integer, unsigned, not-nullable, references)
-- created_at (timestamp, default)
-- updated_at (timestamp, default)
+![IMG_5](/screenshots/feedcomment.png)
 
-### Endpoints
+![IMG_6](/screenshots/feedusercomment.png)
 
-- GET /api/users
-- POST /api/users
-- GET /api/users/:userId
-- DELETE /api/users/:userId
-- PATCH /api/users/:userId
-- GET /api/users/:userId/profile
-- GET /api/users/:userId/followers
-- GET /api/users/:userId/following
-- GET /api/users/:userId/posts
-- POST /api/users/:userId/posts
-- GET /api/users/:userId/feed
-- POST /api/users/:userId/follow
-- DELETE /api/users/:userId/follow
-- GET /api/movies
-- POST /api/movies
-- GET /api/movies/:movieId
-- PATCH /api/movies/:movieId
-- GET /api/movies/:movieId/profile
-- GET /api/movies/:movieId/reviews
-- GET /api/posts
-- GET /api/posts/:postId
-- PATCH /api/posts/:postId
-- PUT /api/posts/:postId/likes
-- POST /api/posts/:postId/comments
+### Delete Comment:
 
-### Auth
+![IMG_7](/screenshots/deletecomment.png)
 
-The application will integrate login and user profile functionality, using authorization.
+### Search for People:
 
-## Roadmap
+![IMG_8](/screenshots/searchusers1.png)
+![IMG_9](/screenshots/searchusers2.png)
 
-1.
+### Other User's Profile Page:
 
-## Nice-to-haves / Next Steps
+![IMG_10](/screenshots/searchuserprofile.png)
 
-- Movie trailer playback (utilizing the YouTube API)
-- Direct messaging for chat and sharing functionality (potentially utilizing socket.io)
-- Explore / Recommedations Page (feed of algorithmically recommended movies, based on users past movie ratings / reviews)
+### Search Movies:
+
+![IMG_11](/screenshots/searchmovies1.png)
+![IMG_12](/screenshots/searchmovies2.png)
+
+### Movie Page:
+
+![IMG_13](/screenshots/moviepage1.png)
+![IMG_14](/screenshots/moviepage2.png)
+![IMG_15](/screenshots/moviepagereviews.png)
+
+### Search Movies to Review:
+
+![IMG_16](/screenshots/reviewsearch1.png)
+
+### Post New Review:
+
+![IMG_17](/screenshots/newreview1.png)
+
+### Edit Review:
+
+![IMG_18](/screenshots/editreview1.png)
+![IMG_19](/screenshots/editreview2.png)
+
+### Delete a Review:
+
+![IMG_20](/screenshots/deletereview1.png)
+
+### Page not Found (signed in):
+
+![IMG_21](/screenshots/pagenotfound2.png)
+
+### Page not Found (not signed in):
+
+![IMG_22](/screenshots/pagenotfound1.png)
