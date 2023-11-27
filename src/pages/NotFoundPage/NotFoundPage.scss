@@ -1,0 +1,24 @@
+@use "../../styles/partials/variables" as *;
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 4rem 0;
+  &__title {
+    padding-bottom: 2rem;
+  }
+  &__subtitle {
+    padding-bottom: 1.5rem;
+  }
+  &__link {
+    color: $moviegram-blue;
+    &:hover {
+      color: $moviegram-darkblue;
+    }
+  }
+  & p {
+    padding-bottom: 1rem;
+  }
+}

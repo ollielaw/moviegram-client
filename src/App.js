@@ -8,6 +8,7 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import PostPage from "./pages/PostPage/PostPage";
 import MoviePage from "./pages/MoviePage/MoviePage";
 import Layout from "./components/Layout/Layout";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/post" element={<SearchPage isPost={true} />} />
             <Route path="/post/:movieId" element={<PostPage />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </div>
