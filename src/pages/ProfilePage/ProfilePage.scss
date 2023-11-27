@@ -13,10 +13,17 @@
     &:hover {
       cursor: pointer;
     }
+    @include desktop {
+      margin-bottom: 3rem;
+    }
   }
   &__wrapper {
     @include tablet {
       padding: 0 2rem;
+    }
+    @include desktop {
+      width: 1080px;
+      margin: 0 auto;
     }
   }
   &__info {

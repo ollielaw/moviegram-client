@@ -1,7 +1,12 @@
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
 
 .search {
   margin: 0 4rem;
+  @include desktop {
+    width: 1080px;
+    margin: 0 auto;
+  }
   &__form {
     padding-top: 2rem;
     padding-bottom: 1rem;

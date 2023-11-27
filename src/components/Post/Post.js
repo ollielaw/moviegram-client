@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { timestampToDynamic } from "../../utils/formattingFunctions";
 
-const Post = ({ data, userData, token, handlePostDelete }) => {
+const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
   const navigate = useNavigate();
   const [comments, setComments] = useState(null);
   const [isCommentsExpanded, setIsCommentsExapnded] = useState(false);
@@ -175,14 +175,25 @@ const Post = ({ data, userData, token, handlePostDelete }) => {
           {timestampToDynamic(Date.parse(data.created_at))}
         </h3>
       </header>
+      {isBackdrop ? (
+        <section className="post__title">
+          <h2>{data.movie_name}</h2>
+        </section>
+      ) : (
+        <></>
+      )}
       <Link
         className="post__poster-wrapper"
         to={`/search/movies/${data.tmdb_id}`}
       >
         <img
-          src={`https://image.tmdb.org/t/p/original${data.poster_url}`}
+          src={
+            isBackdrop
+              ? `https://image.tmdb.org/t/p/original${data.backdrop_url}`
+              : `https://image.tmdb.org/t/p/original${data.poster_url}`
+          }
           alt={`poster of ${data.movie_name}`}
-          className="post__poster"
+          className={`post__poster ${isBackdrop ? "post__poster--bd" : ""}`}
         />
       </Link>
       <div className="post__rating-section">

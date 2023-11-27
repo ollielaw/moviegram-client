@@ -9,10 +9,17 @@
     &:hover {
       cursor: pointer;
     }
+    @include desktop {
+      margin-bottom: 3rem;
+    }
   }
   &__wrapper {
     display: flex;
     width: 100%;
+    @include desktop {
+      width: 1080px;
+      margin: 0 auto;
+    }
   }
   &__movie {
     width: 50%;

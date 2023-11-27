@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const HomePage = () => {
+  const token = sessionStorage.getItem("JWTtoken");
+  const displayType = sessionStorage.getItem("display");
+
   const [userData, setUserData] = useState();
   const [feed, setFeed] = useState();
   const [page, setPage] = useState(2);
+  const [isBackdrop, setIsBackdrop] = useState(displayType === "backdrop");
 
   const navigate = useNavigate();
-
-  const token = sessionStorage.getItem("JWTtoken");
 
   const fetchFeed = async () => {
     try {
@@ -87,24 +89,58 @@ const HomePage = () => {
     }
   };
 
+  const toggleDisplay = (type) => {
+    if (
+      (isBackdrop && type === "backdrop") ||
+      (!isBackdrop && type === "poster")
+    ) {
+      return;
+    }
+    sessionStorage.setItem("display", type);
+    setIsBackdrop(!isBackdrop);
+  };
+
   if (!(feed && userData)) return null;
 
   return (
-    <main className="feed">
-      {feed.map((post) => {
-        return (
-          <Post
-            key={post.id}
-            data={post}
-            userData={userData}
-            token={token}
-            handlePostDelete={handlePostDelete}
-          />
-        );
-      })}
-      <button type="button" className="feed__button" onClick={handleLoad}>
-        Load More
-      </button>
+    <main className="feed__wrapper">
+      <div className="feed__toggles">
+        <button
+          type="button"
+          className={`feed__toggle feed__toggle--poster ${
+            isBackdrop ? "" : "feed__toggle--active"
+          }`}
+          onClick={() => toggleDisplay("poster")}
+        >
+          Display Posters
+        </button>
+        <button
+          type="button"
+          className={`feed__toggle feed__toggle--backdrop ${
+            isBackdrop ? "feed__toggle--active" : ""
+          }`}
+          onClick={() => toggleDisplay("backdrop")}
+        >
+          Display Backdrops
+        </button>
+      </div>
+      <section className="feed">
+        {feed.map((post) => {
+          return (
+            <Post
+              key={post.id}
+              data={post}
+              isBackdrop={isBackdrop}
+              userData={userData}
+              token={token}
+              handlePostDelete={handlePostDelete}
+            />
+          );
+        })}
+        <button type="button" className="feed__button" onClick={handleLoad}>
+          Load More
+        </button>
+      </section>
     </main>
   );
 };
