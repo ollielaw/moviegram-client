@@ -1,5 +1,9 @@
 @use "../../styles/partials/variables" as *;
 
+.ReactModal__Overlay--after-open {
+  z-index: 999;
+}
+
 .modal {
   &__delete {
     margin-left: 1rem;
