@@ -40,6 +40,12 @@ const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
         }
         setComments(response.data);
       } catch (error) {
+        if (error.response.data.error === "TokenExpiredError: jwt expired") {
+          sessionStorage.removeItem("JWTtoken");
+          sessionStorage.removeItem("currUserId");
+          sessionStorage.removeItem("display");
+          navigate("/login");
+        }
         console.error(error);
       }
     };
@@ -79,6 +85,12 @@ const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
       setComments(response.data);
       setComment("");
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };
@@ -115,6 +127,12 @@ const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
         setNumLikes(numLikes + 1);
       }
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };
@@ -136,6 +154,12 @@ const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
       }
       setComments(comments.filter(({ id }) => id !== commentId));
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };

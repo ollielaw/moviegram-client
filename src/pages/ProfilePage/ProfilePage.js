@@ -86,6 +86,12 @@ const ProfilePage = () => {
           setFavorites(favRes.data);
         }
       } catch (error) {
+        if (error.response.data.error === "TokenExpiredError: jwt expired") {
+          sessionStorage.removeItem("JWTtoken");
+          sessionStorage.removeItem("currUserId");
+          sessionStorage.removeItem("display");
+          navigate("/login");
+        }
         console.error(error);
       }
     };
@@ -112,6 +118,12 @@ const ProfilePage = () => {
       setProfilePosts(profilePosts.filter(({ id }) => id !== postId));
       setProfile({ ...profile, num_posts: profile.num_posts - 1 });
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };

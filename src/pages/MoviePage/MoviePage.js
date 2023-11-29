@@ -53,6 +53,12 @@ const MoviePage = () => {
         );
         setMoviePosts(res.data);
       } catch (error) {
+        if (error.response.data.error === "TokenExpiredError: jwt expired") {
+          sessionStorage.removeItem("JWTtoken");
+          sessionStorage.removeItem("currUserId");
+          sessionStorage.removeItem("display");
+          navigate("/login");
+        }
         console.error(error);
       }
     };
@@ -95,6 +101,12 @@ const MoviePage = () => {
       );
       setUserRating(response.data.rating);
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };
@@ -112,6 +124,12 @@ const MoviePage = () => {
       setMoviePosts(moviePosts.filter(({ id }) => id !== postId));
       setUserRating(null);
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };

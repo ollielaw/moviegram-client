@@ -27,6 +27,12 @@ const HomePage = () => {
       );
       setFeed(data);
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };
@@ -48,6 +54,12 @@ const HomePage = () => {
         );
         setUserData(data);
       } catch (error) {
+        if (error.response.data.error === "TokenExpiredError: jwt expired") {
+          sessionStorage.removeItem("JWTtoken");
+          sessionStorage.removeItem("currUserId");
+          sessionStorage.removeItem("display");
+          navigate("/login");
+        }
         console.error(error);
       }
     };
@@ -68,6 +80,12 @@ const HomePage = () => {
       setFeed([...feed, ...data]);
       setPage(page + 1);
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };
@@ -85,6 +103,12 @@ const HomePage = () => {
       await fetchFeed();
       setPage(2);
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };

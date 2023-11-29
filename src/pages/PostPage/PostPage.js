@@ -70,6 +70,12 @@ const PostPage = () => {
           });
         }
       } catch (error) {
+        if (error.response.data.error === "TokenExpiredError: jwt expired") {
+          sessionStorage.removeItem("JWTtoken");
+          sessionStorage.removeItem("currUserId");
+          sessionStorage.removeItem("display");
+          navigate("/login");
+        }
         console.error(error);
       }
     };
@@ -125,6 +131,12 @@ const PostPage = () => {
       navigate("/");
       return;
     } catch (error) {
+      if (error.response.data.error === "TokenExpiredError: jwt expired") {
+        sessionStorage.removeItem("JWTtoken");
+        sessionStorage.removeItem("currUserId");
+        sessionStorage.removeItem("display");
+        navigate("/login");
+      }
       console.error(error);
     }
   };

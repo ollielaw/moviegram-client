@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Header = () => {
   const [userData, setUserData] = useState(null);
-  const token = sessionStorage.getItem("JWTtoken");
+  let token = sessionStorage.getItem("JWTtoken");
 
   useEffect(() => {
     if (!token) {
@@ -26,6 +26,12 @@ const Header = () => {
         );
         setUserData(data);
       } catch (error) {
+        if (error.response.data.error === "TokenExpiredError: jwt expired") {
+          sessionStorage.removeItem("JWTtoken");
+          sessionStorage.removeItem("currUserId");
+          sessionStorage.removeItem("display");
+          token = null;
+        }
         console.error(error);
       }
     };
