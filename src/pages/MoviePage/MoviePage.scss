@@ -88,6 +88,20 @@
       color: $white;
     }
   }
+  &__button {
+    height: 3rem;
+    margin: 1.5rem 0;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    & > img {
+      margin-left: 1rem;
+    }
+    &-container {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
   &__post-button {
     height: 3rem;
     margin: 1.5rem auto;

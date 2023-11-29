@@ -2,10 +2,20 @@
 @use "../../styles/partials/mixins" as *;
 
 .search {
-  margin: 0 4rem;
-  @include desktop {
-    width: 1080px;
-    margin: 0 auto;
+  padding-top: 1rem;
+  &__wrapper {
+    margin: 0 4rem;
+    @include desktop {
+      width: 1080px;
+      margin: 0 auto;
+    }
+  }
+  &__backarrow {
+    width: 2.25rem;
+    margin: 0 2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__form {
     padding-top: 2rem;

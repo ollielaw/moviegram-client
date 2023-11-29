@@ -8,9 +8,24 @@
   border-radius: 0.25rem;
   border: 1px solid $mercury;
   &__wrapper {
-    width: 50%;
+    width: 100%;
     margin: 1rem auto;
     display: flex;
+    @include tablet {
+      width: 75%;
+    }
+    @include desktop {
+      width: 50%;
+    }
+    &--share > .user {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &--convo {
+      @include tablet {
+        width: 75%;
+      }
+    }
   }
   &__avatar {
     padding-right: 1rem;
@@ -21,6 +36,18 @@
     &-reviews {
       color: $silver;
     }
+  }
+  &__share {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid $mercury;
+    border-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
   }
 }
 

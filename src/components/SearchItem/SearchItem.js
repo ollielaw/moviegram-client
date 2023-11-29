@@ -2,9 +2,21 @@ import "./SearchItem.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import uploadIcon from "../../assets/images/upload-review__icon.svg";
+import sendIcon from "../../assets/images/send-white_icon.svg";
+import chatIcon from "../../assets/images/chat-white_icon.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { timestampToDynamic } from "../../utils/formattingFunctions";
 
-const SearchItem = ({ category, data, isPost, token }) => {
+const SearchItem = ({
+  category,
+  data,
+  isPost,
+  isShare,
+  isChat,
+  isConvo,
+  handleShare,
+  token,
+}) => {
   const navigate = useNavigate();
   const [userRating, setUserRating] = useState(null);
 
@@ -63,6 +75,72 @@ const SearchItem = ({ category, data, isPost, token }) => {
   };
 
   if (category === "people") {
+    if (isShare || isChat || isConvo) {
+      return (
+        <div
+          className={`user__wrapper user__wrapper--share ${
+            isConvo ? "user__wrapper--convo" : ""
+          }`}
+        >
+          <article className="user">
+            <img
+              src={data.avatar_url}
+              alt={`avatar of ${data.name}`}
+              className="user__avatar"
+            />
+            <div className="user__info">
+              <div className="user__info-names">
+                <h3>
+                  {data.name} ({data.username})
+                </h3>
+              </div>
+              {isShare || isChat ? (
+                <h4 className="user__info-reviews">
+                  {data.num_posts ? data.num_posts : "0"} review
+                  {data.num_posts === 1 ? "" : "s"}
+                </h4>
+              ) : data.last_sender === data.conversation_id &&
+                !data.has_seen ? (
+                <h4 className="user__info-reviews--new">
+                  {`New message - ${timestampToDynamic(
+                    Date.parse(data.created_at)
+                  )}`}
+                </h4>
+              ) : (
+                <h4 className="user__info-reviews">No new messages</h4>
+              )}
+            </div>
+          </article>
+          {isShare ? (
+            <button
+              className="user__share"
+              type="button"
+              onClick={() => handleShare(data.id, data.username)}
+            >
+              <img src={sendIcon} alt="share icon" />
+            </button>
+          ) : isChat ? (
+            <button
+              className="user__share"
+              type="button"
+              onClick={() => navigate(`/conversations/chat/${data.id}`)}
+            >
+              <img src={chatIcon} alt="chat icon" />
+            </button>
+          ) : (
+            <button
+              className="user__share"
+              type="button"
+              onClick={() =>
+                navigate(`/conversations/chat/${data.conversation_id}`)
+              }
+            >
+              <img src={chatIcon} alt="chat icon" />
+            </button>
+          )}
+        </div>
+      );
+    }
     return (
       <Link to={`users/${data.id}`} className="user__wrapper">
         <article className="user">

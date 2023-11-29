@@ -2,6 +2,7 @@ import "./MoviePage.scss";
 import Post from "../../components/Post/Post";
 import uploadIcon from "../../assets/images/upload-review__icon.svg";
 import backArrow from "../../assets/images/back_arrow.svg";
+import shareIcon from "../../assets/images/send-white_icon.svg";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -271,13 +272,22 @@ const MoviePage = () => {
               10
             </button>
           </div>
-          <button
-            type="button"
-            className="moviepage__post-button"
-            onClick={() => navigate(`/post/${movieData.id}`)}
-          >
-            Add a review <img src={uploadIcon} alt="upload new review icon" />
-          </button>
+          <div className="moviepage__button-container">
+            <button
+              type="button"
+              className="moviepage__button moviepage__button--post"
+              onClick={() => navigate(`/post/${movieData.id}`)}
+            >
+              Add a review <img src={uploadIcon} alt="upload new review icon" />
+            </button>
+            <button
+              type="button"
+              className="moviepage__button moviepage__button--share"
+              onClick={() => navigate(`/search/share/${movieData.id}`)}
+            >
+              Share movie <img src={shareIcon} alt="share movie icon" />
+            </button>
+          </div>
         </section>
         <section className="moviepage__details">
           <article className="moviepage__overview">

@@ -105,7 +105,7 @@ const PostPage = () => {
         tmdb_id,
       };
       if (isUpdate) {
-        const res = await axios.patch(
+        await axios.patch(
           `${process.env.REACT_APP_API_URL}/api/posts/${tmdb_id}`,
           newReview,
           {

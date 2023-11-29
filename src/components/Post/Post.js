@@ -5,6 +5,7 @@ import likeEmptyIcon from "../../assets/images/like_empty_icon.svg";
 import likeFullIcon from "../../assets/images/like_full_blue_icon.svg";
 import commentIcon from "../../assets/images/comment_icon.svg";
 import postIcon from "../../assets/images/upload_icon.svg";
+import shareIcon from "../../assets/images/send_icon.svg";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -246,10 +247,16 @@ const Post = ({ data, isBackdrop, userData, token, handlePostDelete }) => {
             onClick={showComments}
           />
           <img
-            className="post__icon post__icon--last"
+            className="post__icon"
             src={postIcon}
             alt="post button"
             onClick={handleNewPost}
+          />
+          <img
+            className="post__icon post__icon--last"
+            src={shareIcon}
+            alt="share button"
+            onClick={() => navigate(`/search/share/${data.tmdb_id}`)}
           />
         </div>
         <h3 className="post__like-cnt">

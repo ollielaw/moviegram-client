@@ -2,6 +2,7 @@ import "./Header.scss";
 import homeIcon from "../../assets/images/home_icon.svg";
 import searchIcon from "../../assets/images/search_icon.svg";
 import uploadIcon from "../../assets/images/upload_icon.svg";
+import chatIcon from "../../assets/images/chat_icon.svg";
 import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -78,6 +79,16 @@ const Header = () => {
             <img
               src={uploadIcon}
               alt="post navigation icon"
+              className="nav__icon"
+            />
+          </NavLink>
+          <NavLink
+            to="/conversations"
+            className={({ isActive }) => (isActive ? "active" : "inactive")}
+          >
+            <img
+              src={chatIcon}
+              alt="conversations navigation icon"
               className="nav__icon"
             />
           </NavLink>
