@@ -4,17 +4,20 @@ import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Message from "../../components/Message/Message";
+import socket from "../../socket";
 
 const ConversationDetailsPage = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("JWTtoken");
-  const currUser = sessionStorage.getItem("currUserId");
+  const userId = sessionStorage.getItem("currUserId");
   const { conversationId } = useParams();
 
   const [userData, setUserData] = useState();
   const [conversationData, setConversationData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState(null);
+  const [userSocket, setUserSocket] = useState(null);
+  const [otherSocket, setOtherSocket] = useState(null);
 
   const page = useRef(null);
 
@@ -30,7 +33,7 @@ const ConversationDetailsPage = () => {
       );
       setMessages(data);
       for (let i = 0; i < data.length; i++) {
-        if (!data[i].has_seen && data[i].sendee_id === Number(currUser)) {
+        if (!data[i].has_seen && data[i].sendee_id === Number(userId)) {
           await axios.put(
             `${process.env.REACT_APP_API_URL}/api/user/conversations/messages/${data[i].id}`,
             {},
@@ -98,6 +101,15 @@ const ConversationDetailsPage = () => {
   };
 
   useEffect(() => {
+    socket.auth = { userId };
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     if (!token) {
       navigate("/login");
       return;
@@ -133,6 +145,13 @@ const ConversationDetailsPage = () => {
         }
       );
       setMessages([...messages, { ...data, avatar_url: userData.avatar_url }]);
+      socket.emit("message", {
+        data: {
+          ...data,
+          avatar_url: userData.avatar_url,
+          socketId: otherSocket,
+        },
+      });
       setNewMessage("");
     } catch (error) {
       if (error.response.data.error === "TokenExpiredError: jwt expired") {
@@ -144,6 +163,31 @@ const ConversationDetailsPage = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    socket.on("users", (users) => {
+      console.log(users);
+      const otherUser = users.find((user) => user.userId == conversationId);
+      if (otherUser) {
+        setOtherSocket(otherUser.socketId);
+      }
+      const user = users.find((user) => user.userId == userId);
+      if (userId) {
+        setUserSocket(user.socketId);
+      }
+      return;
+    });
+    socket.on("user connected", (user) => {
+      console.log(user);
+      if (user.userId == conversationId) {
+        setOtherSocket(user.socketId);
+      }
+    });
+    socket.on("message", (data) => {
+      console.log(data);
+      setMessages([...messages, data]);
+    });
+  }, [socket]);
 
   if (!(messages && userData && conversationData)) return null;
 

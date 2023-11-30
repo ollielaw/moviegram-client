@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const ConversationsPage = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("JWTtoken");
+  const userId = sessionStorage.getItem("currUserId");
 
   const [conversations, setConversations] = useState(null);
 
