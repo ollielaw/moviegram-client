@@ -102,7 +102,7 @@ const SearchItem = ({
               ) : data.last_sender === data.conversation_id &&
                 !data.has_seen ? (
                 <h4 className="user__info-reviews--new">
-                  {`New message - ${timestampToDynamic(
+                  {`New messages - ${timestampToDynamic(
                     Date.parse(data.created_at)
                   )}`}
                 </h4>

@@ -1,0 +1,47 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  &__time {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    color: $silver;
+  }
+  &__content {
+    display: flex;
+    &--user {
+      flex-direction: row-reverse;
+    }
+  }
+  &__avatar {
+    display: flex;
+    height: fit-content;
+    margin: 0 0.5rem;
+    align-self: last baseline;
+  }
+  &__poster {
+    width: 20rem;
+    border-radius: 0.25rem;
+    border: 1px solid $mercury;
+    &-wrapper {
+      display: flex;
+    }
+  }
+
+  &__message {
+    display: flex;
+    padding: 0.5625rem 1rem;
+    max-width: 33%;
+    border-radius: 1.25rem;
+    background: $lightgrey;
+    &--user {
+      background: $moviegram-blue;
+      & > p {
+        color: $white;
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.chat {
+  margin: 0 2rem;
+  &__backarrow {
+    width: 2.25rem;
+    margin-right: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__header {
+    position: sticky;
+    top: 76px;
+    background: $white;
+    display: flex;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid $mercury;
+  }
+  &__info {
+    &-avatar {
+      margin-right: 1rem;
+    }
+  }
+  &__messages {
+    width: 100%;
+    min-height: calc(100vh - 16.125rem);
+    display: flex;
+    flex-direction: column;
+  }
+  &__form {
+    display: flex;
+    padding: 1.5rem 0;
+    border-top: 1px solid $mercury;
+    background: $white;
+    position: sticky;
+    bottom: 0;
+    & > a {
+      margin-right: 1rem;
+      display: flex;
+    }
+  }
+  &__input {
+    flex-grow: 1;
+    height: 2.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    &:focus + .chat__button {
+      border: $moviegram-blue;
+    }
+  }
+  &__button {
+    height: 2.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid $mercury;
+    border-left: 0;
+  }
+}

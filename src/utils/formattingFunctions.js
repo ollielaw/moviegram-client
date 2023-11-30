@@ -43,6 +43,11 @@ export const timestampToDynamic = (timestamp) => {
   return `${yearsAgo} years ago`;
 };
 
+export const formatMessageDate = (timestamp) => {
+  let date = new Date(timestamp);
+  return date.toDateString("en-US") + ", " + date.toLocaleTimeString("en-US");
+};
+
 export const priceToString = (price) => {
   const priceArr = [...String(price)];
   let priceStr = "";
