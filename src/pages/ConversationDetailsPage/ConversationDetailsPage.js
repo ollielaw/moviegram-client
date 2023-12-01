@@ -15,8 +15,7 @@ const ConversationDetailsPage = () => {
   const [userData, setUserData] = useState();
   const [conversationData, setConversationData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
-  const [messages, setMessages] = useState(null);
-  const [userSocket, setUserSocket] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [otherSocket, setOtherSocket] = useState(null);
 
   const page = useRef(null);
@@ -166,28 +165,21 @@ const ConversationDetailsPage = () => {
 
   useEffect(() => {
     socket.on("users", (users) => {
-      console.log(users);
       const otherUser = users.find((user) => user.userId == conversationId);
       if (otherUser) {
         setOtherSocket(otherUser.socketId);
       }
-      const user = users.find((user) => user.userId == userId);
-      if (userId) {
-        setUserSocket(user.socketId);
-      }
       return;
     });
     socket.on("user connected", (user) => {
-      console.log(user);
       if (user.userId == conversationId) {
         setOtherSocket(user.socketId);
       }
     });
-    socket.on("message", (data) => {
-      console.log(data);
+    socket.on("message", ({ data }) => {
       setMessages([...messages, data]);
     });
-  }, [socket]);
+  }, [socket, messages]);
 
   if (!(messages && userData && conversationData)) return null;
 
